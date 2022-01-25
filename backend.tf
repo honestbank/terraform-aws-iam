@@ -3,7 +3,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "honestbank"
     workspaces {
-      prefix = "aws-subnet-"
+      prefix = "aws-iam-"
     }
   }
 }
