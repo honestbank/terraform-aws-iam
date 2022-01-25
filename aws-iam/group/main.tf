@@ -22,8 +22,8 @@ provider "aws" {
 }
 
 resource "aws_iam_group" "group" {
-  name = var.group
-  path = var.group
+  name = var.group.name
+  path = var.group.path
 }
 
 resource "aws_iam_group_policy_attachment" "policy_attachments" {

@@ -42,13 +42,16 @@ module "aws-iam-policy" {
   }
 }
 
+
+
+
 module "aws-iam-group" {
   source = "./aws-iam/group"
 
   group = {
     name     = "test-group"
     path     = "/"
-    policies = module.aws-iam-policy.policy.arn
+    policies = module.aws-iam-policy.policy_arn
   }
 }
 
@@ -59,5 +62,8 @@ module "aws-iam-user" {
     name   = "test-user"
     path   = "/"
     groups = [module.aws-iam-group.group.name]
+    tags = {
+       
+    }
   }
 }
