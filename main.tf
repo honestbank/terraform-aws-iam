@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "example" {
   }
 }
 
-module "aws_iam_policy" "test-policy" {
+module "test-policy" {
   source = "./aws-iam/policy"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
@@ -50,7 +50,7 @@ module "aws_iam_policy" "test-policy" {
 }
 
 
-module "aws_iam_group" "test-group" {
+module "test-group" {
   source = "./aws-iam/group"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
@@ -58,7 +58,7 @@ module "aws_iam_group" "test-group" {
   group = {
     name     = "test-group"
     path     = "/"
-    policies = [module.aws_iam_policy.test-policy.policy_arn]
+    policies = [module.test-policy.policy_arn]
     #policies = [local.arn]
   }
   depends_on = [
@@ -66,7 +66,7 @@ module "aws_iam_group" "test-group" {
   ]
 }
 
-module "aws_iam_user" "test-user" {
+module "test-user" {
   source = "./aws-iam/user"
   aws_region = var.aws_region
   aws_role_arn = var.aws_role_arn
@@ -74,7 +74,7 @@ module "aws_iam_user" "test-user" {
   user = {
     name   = "test-user"
     path   = "/"
-    groups = [module.aws_iam_group.test-group.group.name]
+    groups = [module.test-group.group.name]
     tags = {
        
     }
@@ -97,7 +97,7 @@ data "aws_iam_policy_document" "example2" {
   }
 }
 
-module "aws_iam_policy" "test-policy2" {
+module "test-policy2" {
   source = "./aws-iam/policy"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
@@ -112,7 +112,7 @@ module "aws_iam_policy" "test-policy2" {
 }
 
 
-module "aws_iam_group" "test-group2" {
+module "test-group2" {
   source = "./aws-iam/group"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
@@ -120,7 +120,7 @@ module "aws_iam_group" "test-group2" {
   group = {
     name     = "test-group2"
     path     = "/test2"
-    policies = [module.aws_iam_policy.test-policy2.policy_arn]
+    policies = [module.test-policy2.policy_arn]
     #policies = [local.arn]
   }
   depends_on = [
@@ -128,7 +128,7 @@ module "aws_iam_group" "test-group2" {
   ]
 }
 
-module "aws_iam_user" "test-user2" {
+module "test-user2" {
   source = "./aws-iam/user"
   aws_region = var.aws_region
   aws_role_arn = var.aws_role_arn
@@ -136,14 +136,14 @@ module "aws_iam_user" "test-user2" {
   user = {
     name   = "test-user2"
     path   = "/test2"
-    groups = [module.aws_iam_group.test-group2.group.name]
+    groups = [module.test-group2.group.name]
     tags = {
        
     }
   }
 }
 
-module "aws_iam_role" "dummy_role" {
+module "dummy_role" {
   source = "./aws-iam/role"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
@@ -161,11 +161,11 @@ data "aws_iam_policy_document" "assume_role" {
   statement {
     actions   = ["sts:AssumeRole"]
     effect    = "Allow"
-    resources = [module.aws_iam_role.dummy_role.role_arn]
+    resources = [module.dummy_role.role_arn]
   }
 }
 
-module "aws_iam_policy" "test-policy3" {
+module "test-policy3" {
   source = "./aws-iam/policy"
   aws_region = var.aws_region
     aws_role_arn = var.aws_role_arn
