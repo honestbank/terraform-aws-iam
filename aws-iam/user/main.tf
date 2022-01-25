@@ -25,6 +25,8 @@ resource "aws_iam_user" "user" {
   name = var.user.name
   path = var.user.path
 
+  force_destroy = true
+
   tags = merge({
     createdBy = "createdBy aws-iam/user"
   }, var.user.tags)

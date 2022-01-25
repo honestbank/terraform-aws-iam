@@ -25,6 +25,8 @@ resource "aws_iam_role" "role" {
   name = var.role.name
   path = var.role.path
 
+  force_detach_policies = true
+
   tags = merge({
     createdBy = "terraform aws-iam/role"
   }, var.role.tags)
