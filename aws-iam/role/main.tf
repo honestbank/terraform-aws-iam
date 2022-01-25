@@ -39,6 +39,8 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
   policy_arn = each.value
 }
 
+# we compose arn here as role is created where we have access wether this is from 
+# assume role or the user actually accessing.
 locals {
   arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.role.name}"
 }

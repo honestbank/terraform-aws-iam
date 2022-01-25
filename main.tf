@@ -116,7 +116,7 @@ module "test-policy2" {
   policy = {
     name        = "test-policy2"
     description = "test policy2"
-    path        = "/test2"
+    path        = "/test2/"
 
     policy = data.aws_iam_policy_document.example.json
   }
@@ -130,7 +130,7 @@ module "test-group2" {
 
   group = {
     name     = "test-group2"
-    path     = "/test2"
+    path     = "/test2/"
     policies = [module.test-policy2.policy_arn]
     #policies = [local.arn]
   }
@@ -146,7 +146,7 @@ module "test-user2" {
 
   user = {
     name   = "test-user2"
-    path   = "/test2"
+    path   = "/test2/"
     groups = [module.test-group2.group.name]
     tags = {
 
