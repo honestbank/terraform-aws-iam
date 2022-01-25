@@ -27,6 +27,7 @@ resource "aws_iam_role" "role" {
 
   force_detach_policies = true
 
+  assume_role_policy = var.role.assume_role_policy
   tags = merge({
     createdBy = "terraform aws-iam/role"
   }, var.role.tags)

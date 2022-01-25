@@ -36,9 +36,9 @@ data "aws_iam_policy_document" "example" {
 }
 
 module "test-policy" {
-  source = "./aws-iam/policy"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+  source       = "./aws-iam/policy"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   policy = {
     name        = "test-policy"
@@ -51,9 +51,9 @@ module "test-policy" {
 
 
 module "test-group" {
-  source = "./aws-iam/group"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+  source       = "./aws-iam/group"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   group = {
     name     = "test-group"
@@ -62,13 +62,13 @@ module "test-group" {
     #policies = [local.arn]
   }
   depends_on = [
-   # data.aws_policy.asdf
+    # data.aws_policy.asdf
   ]
 }
 
 module "test-user" {
-  source = "./aws-iam/user"
-  aws_region = var.aws_region
+  source       = "./aws-iam/user"
+  aws_region   = var.aws_region
   aws_role_arn = var.aws_role_arn
 
   user = {
@@ -76,7 +76,7 @@ module "test-user" {
     path   = "/"
     groups = [module.test-group.group.name]
     tags = {
-       
+
     }
   }
 }
@@ -97,10 +97,21 @@ data "aws_iam_policy_document" "example2" {
   }
 }
 
+data "aws_iam_policy_document" "assume_role_dummy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
 module "test-policy2" {
-  source = "./aws-iam/policy"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+  source       = "./aws-iam/policy"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   policy = {
     name        = "test-policy2"
@@ -113,9 +124,9 @@ module "test-policy2" {
 
 
 module "test-group2" {
-  source = "./aws-iam/group"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+  source       = "./aws-iam/group"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   group = {
     name     = "test-group2"
@@ -124,13 +135,13 @@ module "test-group2" {
     #policies = [local.arn]
   }
   depends_on = [
-   # data.aws_policy.asdf
+    # data.aws_policy.asdf
   ]
 }
 
 module "test-user2" {
-  source = "./aws-iam/user"
-  aws_region = var.aws_region
+  source       = "./aws-iam/user"
+  aws_region   = var.aws_region
   aws_role_arn = var.aws_role_arn
 
   user = {
@@ -138,21 +149,28 @@ module "test-user2" {
     path   = "/test2"
     groups = [module.test-group2.group.name]
     tags = {
-       
+
     }
   }
 }
 
+
+
 module "dummy_role" {
-  source = "./aws-iam/role"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+  source       = "./aws-iam/role"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   role = {
     name        = "dummy-role"
     description = "dummy role"
     path        = "/"
 
+    assume_role_policy = data.aws_iam_policy_document.assume_role_dummy.json
+
+    tags = {
+
+    }
     policies = []
   }
 }
@@ -165,32 +183,22 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
-module "test-policy3" {
-  source = "./aws-iam/policy"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
 
-  policy = {
-    name        = "test-policy3"
-    description = "test policy3"
-    path        = "/test2"
-
-    policy = data.aws_iam_policy_document.assume_role.json
-  }
-}
-
-
-
-module "aws_iam_role" "test-role2" {
-  source = "./aws-iam/role"
-  aws_region = var.aws_region
-    aws_role_arn = var.aws_role_arn
+module "test-role2" {
+  source       = "./aws-iam/role"
+  aws_region   = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   role = {
     name        = "test-role2"
     description = "test role2"
     path        = "/"
 
-    policies = [module.aws_iam_policy.test-policy3.policy_arn]
+    assume_role_policy = data.aws_iam_policy_document.assume_role.json
+
+    tags = {
+
+    }
+    policies = [module.test-policy2.policy_arn]
   }
 }
