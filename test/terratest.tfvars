@@ -4,3 +4,4 @@ subnet_name = "lab-networking-subnet"
 subnet_tags = {
 CreatedBy = "terraform-aws-subnet-lab"
 }
+aws_role_arn = "arn:aws:iam::509042517039:role/OrganizationAccountAccessRole"

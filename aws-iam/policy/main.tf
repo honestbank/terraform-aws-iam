@@ -15,7 +15,6 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
-  alias  = "target"
   assume_role {
     role_arn = var.aws_role_arn
   }
@@ -28,5 +27,12 @@ resource "aws_iam_policy" "policy" {
   
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  policy = jsonencode(var.policy.policy)
+  policy = var.policy.policy
 }
+
+locals {
+  arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/${var.policy.name}"
+}
+
+
+data "aws_caller_identity" "current" {}

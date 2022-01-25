@@ -32,6 +32,8 @@ data "aws_iam_policy_document" "example" {
 
 module "aws-iam-policy" {
   source = "./aws-iam/policy"
+  aws_region = var.aws_region
+    aws_role_arn = var.aws_role_arn
 
   policy = {
     name        = "test-policy"
@@ -45,18 +47,27 @@ module "aws-iam-policy" {
 
 
 
+
 module "aws-iam-group" {
   source = "./aws-iam/group"
+  aws_region = var.aws_region
+    aws_role_arn = var.aws_role_arn
 
   group = {
     name     = "test-group"
     path     = "/"
-    policies = module.aws-iam-policy.policy_arn
+    policies = [module.aws-iam-policy.policy_arn]
+    #policies = [local.arn]
   }
+  depends_on = [
+   # data.aws_policy.asdf
+  ]
 }
 
 module "aws-iam-user" {
   source = "./aws-iam/user"
+  aws_region = var.aws_region
+  aws_role_arn = var.aws_role_arn
 
   user = {
     name   = "test-user"

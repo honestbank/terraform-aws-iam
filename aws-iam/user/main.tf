@@ -33,5 +33,5 @@ resource "aws_iam_user" "user" {
 resource "aws_iam_user_group_membership" "groups_attached" {
   user = aws_iam_user.user.name
 
-  groups = [for g in var.user.groups : g.name]
+  groups = var.user.groups
 }

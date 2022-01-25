@@ -12,7 +12,6 @@ variable "group" {
 
 variable "aws_region" {
   description = "AWS Region"
-  default     = null
 }
 
 variable "aws_role_arn" {
