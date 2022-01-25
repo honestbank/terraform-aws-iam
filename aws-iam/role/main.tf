@@ -37,3 +37,10 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = aws_iam_role.role.name
   policy_arn = var.role.policies[each.key]
 }
+
+locals {
+  arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.role.name}"
+}
+
+
+data "aws_caller_identity" "current" {}
