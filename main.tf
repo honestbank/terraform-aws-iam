@@ -45,9 +45,6 @@ module "aws-iam-policy" {
 }
 
 
-
-
-
 module "aws-iam-group" {
   source = "./aws-iam/group"
   aws_region = var.aws_region
