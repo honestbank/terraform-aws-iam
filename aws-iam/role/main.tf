@@ -36,7 +36,7 @@ resource "aws_iam_role" "role" {
 resource "aws_iam_role_policy_attachment" "test-attach" {
   for_each   = toset(var.role.policies)
   role       = aws_iam_role.role.name
-  policy_arn = var.role.policies[each.key]
+  policy_arn = each.value
 }
 
 locals {

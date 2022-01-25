@@ -5,7 +5,7 @@ variable "role" {
     path = string
     tags = map(any)
     assume_role_policy = string
-    policies = list(string) # policy names
+    policies = list(string) # policy arn
   })
   default = null
 }
