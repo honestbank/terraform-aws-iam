@@ -58,11 +58,7 @@ module "test-group" {
     name     = "test-group"
     path     = "/"
     policies = [module.test-policy.policy_arn]
-    #policies = [local.arn]
   }
-  depends_on = [
-    # data.aws_policy.asdf
-  ]
 }
 
 module "test-user" {
