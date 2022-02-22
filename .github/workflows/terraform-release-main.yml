@@ -5,6 +5,7 @@ on:
 env:
   tf_version: "latest"
   tf_working_dir: "."
+  TF_VAR_aws_region: ${{ secrets.TERRATEST_AWS_REGION }}
 jobs:
   terraform:
     name: "terraform-release"
@@ -15,6 +16,8 @@ jobs:
         with:
           submodules: "recursive"
           token: ${{ secrets.ENGINEERING_GITHUB_PERSONAL_ACCESS_TOKEN }}
+      - name: Remove backend
+        run: rm backend.tf
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
