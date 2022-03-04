@@ -28,8 +28,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `any` | n/a | yes |
-| <a name="input_policy"></a> [policy](#input\_policy) | Policy | <pre>object({<br>    name        = string<br>    path        = string<br>    description = string<br>    policy      = string<br>  })</pre> | n/a | yes |
+| <a name="input_policy"></a> [policy](#input\_policy) | Policy | <pre>object({<br>    name        = string<br>    path        = string<br>    description = string<br>    policy      = string<br>    tags = map(any)<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

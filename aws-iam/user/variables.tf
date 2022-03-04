@@ -9,6 +9,3 @@ variable "user" {
   nullable = false
 }
 
-variable "aws_region" {
-  description = "AWS Region"
-}

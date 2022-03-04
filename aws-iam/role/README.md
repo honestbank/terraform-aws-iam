@@ -29,7 +29,6 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `any` | n/a | yes |
 | <a name="input_role"></a> [role](#input\_role) | The role to create | <pre>object({<br>    name = string<br>    path = string<br>    tags = map(any)<br>    assume_role_policy = string<br>    policies = list(string) # policy arn<br>  })</pre> | n/a | yes |
 
 ## Outputs

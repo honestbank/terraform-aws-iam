@@ -1,4 +1,3 @@
-
 variable "group" {
   description = "Name and path of group"
   type = object({
@@ -8,9 +7,3 @@ variable "group" {
   })
   nullable = false
 }
-
-
-variable "aws_region" {
-  description = "AWS Region"
-}
-

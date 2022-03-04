@@ -37,7 +37,6 @@ data "aws_iam_policy_document" "example" {
 
 module "test-policy" {
   source       = "./aws-iam/policy"
-  aws_region   = var.aws_region
 
   policy = {
     name        = "test-policy"
@@ -52,7 +51,6 @@ module "test-policy" {
 
 module "test-group" {
   source       = "./aws-iam/group"
-  aws_region   = var.aws_region
 
   group = {
     name     = "test-group"
@@ -63,7 +61,6 @@ module "test-group" {
 
 module "test-user" {
   source       = "./aws-iam/user"
-  aws_region   = var.aws_region
 
   user = {
     name   = "test-user"
@@ -111,7 +108,6 @@ data "aws_iam_policy_document" "allow_assume_dummy_role" {
 
 module "test-policy2" {
   source       = "./aws-iam/policy"
-  aws_region   = var.aws_region
 
   policy = {
     name        = "test-policy2"
@@ -125,7 +121,6 @@ module "test-policy2" {
 
 module "test-group2" {
   source       = "./aws-iam/group"
-  aws_region   = var.aws_region
 
   group = {
     name     = "test-group2"
@@ -144,7 +139,6 @@ data "aws_iam_policy" "test_policy2_arn" {
 
 module "test-user2" {
   source       = "./aws-iam/user"
-  aws_region   = var.aws_region
 
   user = {
     name   = "test-user2"
@@ -158,7 +152,6 @@ module "test-user2" {
 
 module "dummy_role" {
   source       = "./aws-iam/role"
-  aws_region   = var.aws_region
 
   role = {
     name        = "dummy-role"
@@ -185,7 +178,6 @@ module "dummy_role" {
 
 module "test-role2" {
   source       = "./aws-iam/role"
-  aws_region   = var.aws_region
 
   role = {
     name        = "test-role2"
