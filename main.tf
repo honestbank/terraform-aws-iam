@@ -36,14 +36,13 @@ data "aws_iam_policy_document" "example" {
 }
 
 module "test-policy" {
-  source       = "./aws-iam/policy"
-  aws_region   = var.aws_region
+  source = "./aws-iam/policy"
 
   policy = {
     name        = "test-policy"
     description = "test policy"
     path        = "/"
-    tags = {}
+    tags        = {}
 
     policy = data.aws_iam_policy_document.example.json
   }
@@ -51,8 +50,7 @@ module "test-policy" {
 
 
 module "test-group" {
-  source       = "./aws-iam/group"
-  aws_region   = var.aws_region
+  source = "./aws-iam/group"
 
   group = {
     name     = "test-group"
@@ -62,8 +60,7 @@ module "test-group" {
 }
 
 module "test-user" {
-  source       = "./aws-iam/user"
-  aws_region   = var.aws_region
+  source = "./aws-iam/user"
 
   user = {
     name   = "test-user"
@@ -95,7 +92,7 @@ data "aws_iam_policy_document" "assume_role_dummy" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = [module.dummy_role.role_arn]
     }
   }
@@ -103,29 +100,27 @@ data "aws_iam_policy_document" "assume_role_dummy" {
 
 data "aws_iam_policy_document" "allow_assume_dummy_role" {
   statement {
-    actions = ["sts:AssumeRole"]
-    effect  = "Allow"
+    actions   = ["sts:AssumeRole"]
+    effect    = "Allow"
     resources = [module.dummy_role.role_arn]
   }
 }
 
 module "test-policy2" {
-  source       = "./aws-iam/policy"
-  aws_region   = var.aws_region
+  source = "./aws-iam/policy"
 
   policy = {
     name        = "test-policy2"
     description = "test policy2"
     path        = "/"
-    tags = {}
+    tags        = {}
 
     policy = data.aws_iam_policy_document.allow_assume_dummy_role.json
   }
 }
 
 module "test-group2" {
-  source       = "./aws-iam/group"
-  aws_region   = var.aws_region
+  source = "./aws-iam/group"
 
   group = {
     name     = "test-group2"
@@ -143,8 +138,7 @@ data "aws_iam_policy" "test_policy2_arn" {
 }
 
 module "test-user2" {
-  source       = "./aws-iam/user"
-  aws_region   = var.aws_region
+  source = "./aws-iam/user"
 
   user = {
     name   = "test-user2"
@@ -157,8 +151,7 @@ module "test-user2" {
 }
 
 module "dummy_role" {
-  source       = "./aws-iam/role"
-  aws_region   = var.aws_region
+  source = "./aws-iam/role"
 
   role = {
     name        = "dummy-role"
@@ -184,8 +177,7 @@ module "dummy_role" {
 }
 
 module "test-role2" {
-  source       = "./aws-iam/role"
-  aws_region   = var.aws_region
+  source = "./aws-iam/role"
 
   role = {
     name        = "test-role2"

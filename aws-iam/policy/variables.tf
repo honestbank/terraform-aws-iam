@@ -5,11 +5,8 @@ variable "policy" {
     path        = string
     description = string
     policy      = string
-    tags = map(any)
+    tags        = map(any)
   })
   nullable = false
 }
 
-variable "aws_region" {
-  description = "AWS Region"
-}
