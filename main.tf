@@ -39,7 +39,7 @@ module "test-policy" {
   source = "./aws-iam/policy"
 
   policy = {
-    name        = "test-policy"
+    name        = "test-policy-${random_string.test_run_id.result}"
     description = "test policy"
     path        = "/"
     tags        = {}
@@ -53,7 +53,7 @@ module "test-group" {
   source = "./aws-iam/group"
 
   group = {
-    name     = "test-group"
+    name     = "test-group-${random_string.test_run_id.result}"
     path     = "/"
     policies = [module.test-policy.policy_arn]
   }
@@ -63,7 +63,7 @@ module "test-user" {
   source = "./aws-iam/user"
 
   user = {
-    name   = "test-user"
+    name   = "test-user-${random_string.test_run_id.result}"
     path   = "/"
     groups = [module.test-group.group.name]
     tags = {
@@ -110,7 +110,7 @@ module "test-policy2" {
   source = "./aws-iam/policy"
 
   policy = {
-    name        = "test-policy2"
+    name        = "test-policy2-${random_string.test_run_id.result}"
     description = "test policy2"
     path        = "/"
     tags        = {}
@@ -123,7 +123,7 @@ module "test-group2" {
   source = "./aws-iam/group"
 
   group = {
-    name     = "test-group2"
+    name     = "test-group2-${random_string.test_run_id.result}"
     path     = "/test2/"
     policies = [module.test-policy2.policy_arn]
   }
@@ -141,7 +141,7 @@ module "test-user2" {
   source = "./aws-iam/user"
 
   user = {
-    name   = "test-user2"
+    name   = "test-user2-${random_string.test_run_id.result}"
     path   = "/test2/"
     groups = [module.test-group2.group.name]
     tags = {
@@ -154,7 +154,7 @@ module "dummy_role" {
   source = "./aws-iam/role"
 
   role = {
-    name        = "dummy-role"
+    name        = "dummy-role-${random_string.test_run_id.result}"
     description = "dummy role"
     path        = "/"
 
@@ -180,7 +180,7 @@ module "test-role2" {
   source = "./aws-iam/role"
 
   role = {
-    name        = "test-role2"
+    name        = "test-role2-${random_string.test_run_id.result}"
     description = "test role2"
     path        = "/"
 
@@ -193,3 +193,9 @@ module "test-role2" {
   }
 }
 
+resource "random_string" "test_run_id" {
+  length  = 4
+  special = false
+  upper   = false
+  lower   = true
+}

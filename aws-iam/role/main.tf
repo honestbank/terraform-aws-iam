@@ -25,19 +25,13 @@ resource "aws_iam_role" "role" {
   }, var.role.tags)
 }
 
-resource "aws_iam_role_policy_attachment" "test-attach" {
-  for_each   = toset(var.role.policies)
+resource "aws_iam_role_policy_attachment" "policy_attachment" {
+  count      = length(var.role.policies)
   role       = aws_iam_role.role.name
-  policy_arn = each.value
+  policy_arn = var.role.policies[count.index]
   depends_on = [
     aws_iam_role.role,
   ]
-}
-
-# we compose arn here as role is created where we have access wether this is from 
-# assume role or the user actually accessing.
-locals {
-  arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${var.role.path != null ? "${var.role.path}" : "/"}${var.role.name}"
 }
 
 data "aws_caller_identity" "current" {}

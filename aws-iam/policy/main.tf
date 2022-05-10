@@ -27,11 +27,4 @@ resource "aws_iam_policy" "policy" {
   }, var.policy.tags)
 }
 
-# we compose arn here as role is created where we have access wether this is from 
-# assume role or the user actually accessing.
-locals {
-  arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy${var.policy.path != null ? "${var.policy.path}" : "/"}${var.policy.name}"
-}
-
-
 data "aws_caller_identity" "current" {}

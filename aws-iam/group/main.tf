@@ -19,9 +19,9 @@ resource "aws_iam_group" "group" {
 }
 
 resource "aws_iam_group_policy_attachment" "policy_attachments" {
-  for_each   = toset(var.group.policies)
+  count      = length(var.group.policies)
   group      = aws_iam_group.group.name
-  policy_arn = each.value
+  policy_arn = var.group.policies[count.index]
 
   depends_on = [
     aws_iam_group.group,
