@@ -3,5 +3,5 @@ output "policy" {
 }
 
 output "policy_arn" {
-  value = local.arn
+  value = aws_iam_policy.policy.arn
 }
