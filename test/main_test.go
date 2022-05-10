@@ -43,6 +43,7 @@ func setupTest() (string, error) {
 
 const tfWorkspaceEnvVarName = "TF_WORKSPACE"
 const targetWorkspace = "test"
+const testRunIDOutputKey = "test_run_id"
 
 func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 	//Region := "ap-southeast-1"
@@ -84,21 +85,23 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 		log.Fatal(err)
 	}
 
+	testRunID := terraform.Output(t, terraformInitOptions, testRunIDOutputKey)
+
 	// Create an Amazon S3 service client
 	client := iam.NewFromConfig(cfg)
 	t.Run("Test #1: Create user group and polcies", func(t *testing.T) {
 		a := assert.New(t)
 		var err error
-		testUser := "test-user"
-		testPolicy := "test-policy"
-		testGroup := "test-group"
+		testUser := fmt.Sprintf("test-user-%s", testRunID)
+		testPolicy := fmt.Sprintf("test-policy-%s", testRunID)
+		testGroup := fmt.Sprintf("test-group-%s", testRunID)
 
 		testUserV, err := client.GetUser(context.TODO(), &iam.GetUserInput{
 			UserName: &testUser,
 		})
 		a.NoError(err)
 
-		a.Equal("test-user", *testUserV.User.UserName)
+		a.Equal(testUser, *testUserV.User.UserName)
 		a.Equal("createdBy", *testUserV.User.Tags[0].Key)
 		a.Equal("createdBy aws-iam/user", *testUserV.User.Tags[0].Value)
 		a.Equal("/", *testUserV.User.Path)
@@ -108,9 +111,9 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 		})
 		a.NoError(err)
 
-		a.Equal("test-group", *testGroupV.Group.GroupName)
+		a.Equal(testGroup, *testGroupV.Group.GroupName)
 		a.Equal("/", *testGroupV.Group.Path)
-		a.Equal("test-user", *testGroupV.Users[0].UserName)
+		a.Equal(testUser, *testGroupV.Users[0].UserName)
 
 		testGroupPolicies, err := client.ListAttachedGroupPolicies(context.TODO(), &iam.ListAttachedGroupPoliciesInput{
 			GroupName: &testGroup,
@@ -125,17 +128,17 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 	t.Run("Test #2: Create user group and polcies", func(t *testing.T) {
 		a := assert.New(t)
 		var err error
-		testUser := "test-user2"
-		testPolicy := "test-policy2"
-		testGroup := "test-group2"
-		testRole := "dummy-role"
+		testUser := fmt.Sprintf("test-user2-%s", testRunID)
+		testPolicy := fmt.Sprintf("test-policy2-%s", testRunID)
+		testGroup := fmt.Sprintf("test-group2-%s", testRunID)
+		testRole := fmt.Sprintf("dummy-role-%s", testRunID)
 
 		testUserV, err := client.GetUser(context.TODO(), &iam.GetUserInput{
 			UserName: &testUser,
 		})
 		a.NoError(err)
 
-		a.Equal("test-user2", *testUserV.User.UserName)
+		a.Equal(testUser, *testUserV.User.UserName)
 		a.Equal("createdBy", *testUserV.User.Tags[0].Key)
 		a.Equal("createdBy aws-iam/user", *testUserV.User.Tags[0].Value)
 		a.Equal("/test2/", *testUserV.User.Path)
@@ -145,9 +148,9 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 		})
 		a.NoError(err)
 
-		a.Equal("test-group2", *testGroupV.Group.GroupName)
+		a.Equal(testGroup, *testGroupV.Group.GroupName)
 		a.Equal("/test2/", *testGroupV.Group.Path)
-		a.Equal("test-user2", *testGroupV.Users[0].UserName)
+		a.Equal(testUser, *testGroupV.Users[0].UserName)
 
 		testGroupPolicies, err := client.ListAttachedGroupPolicies(context.TODO(), &iam.ListAttachedGroupPoliciesInput{
 			GroupName: &testGroup,
@@ -164,7 +167,7 @@ func TestTerraformCodeInfrastructureInitialCredentials(t *testing.T) {
 
 		a.NoError(err)
 
-		a.Equal("dummy-role", *dummyRoleV.Role.RoleName)
+		a.Equal(testRole, *dummyRoleV.Role.RoleName)
 
 	})
 }
