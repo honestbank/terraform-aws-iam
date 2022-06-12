@@ -6,10 +6,6 @@ terraform {
       source  = "hashicorp/aws"
       version = ">= 4.12.0"
     }
-    template = {
-      source  = "hashicorp/template"
-      version = "~> 2.2.0"
-    }
   }
 }
 
@@ -36,7 +32,7 @@ data "aws_iam_policy_document" "example" {
 }
 
 module "test-policy" {
-  source = "./aws-iam/policy"
+  source = "./modules/policy"
 
   policy = {
     name        = "test-policy-${random_string.test_run_id.result}"
@@ -48,9 +44,9 @@ module "test-policy" {
   }
 }
 
-
+#tfsec:ignore:aws-iam-enforce-mfa # Dummy policy used for demoing module
 module "test-group" {
-  source = "./aws-iam/group"
+  source = "./modules/group"
 
   group = {
     name     = "test-group-${random_string.test_run_id.result}"
@@ -60,7 +56,7 @@ module "test-group" {
 }
 
 module "test-user" {
-  source = "./aws-iam/user"
+  source = "./modules/user"
 
   user = {
     name   = "test-user-${random_string.test_run_id.result}"
@@ -107,7 +103,7 @@ data "aws_iam_policy_document" "allow_assume_dummy_role" {
 }
 
 module "test-policy2" {
-  source = "./aws-iam/policy"
+  source = "./modules/policy"
 
   policy = {
     name        = "test-policy2-${random_string.test_run_id.result}"
@@ -119,8 +115,9 @@ module "test-policy2" {
   }
 }
 
+#tfsec:ignore:aws-iam-enforce-mfa # Dummy policy used for demoing module
 module "test-group2" {
-  source = "./aws-iam/group"
+  source = "./modules/group"
 
   group = {
     name     = "test-group2-${random_string.test_run_id.result}"
@@ -138,7 +135,7 @@ data "aws_iam_policy" "test_policy2_arn" {
 }
 
 module "test-user2" {
-  source = "./aws-iam/user"
+  source = "./modules/user"
 
   user = {
     name   = "test-user2-${random_string.test_run_id.result}"
@@ -151,7 +148,7 @@ module "test-user2" {
 }
 
 module "dummy_role" {
-  source = "./aws-iam/role"
+  source = "./modules/role"
 
   role = {
     name        = "dummy-role-${random_string.test_run_id.result}"
@@ -177,7 +174,7 @@ module "dummy_role" {
 }
 
 module "test-role2" {
-  source = "./aws-iam/role"
+  source = "./modules/role"
 
   role = {
     name        = "test-role2-${random_string.test_run_id.result}"

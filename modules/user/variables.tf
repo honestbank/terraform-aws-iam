@@ -8,4 +8,3 @@ variable "user" {
   })
   nullable = false
 }
-

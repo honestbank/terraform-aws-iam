@@ -9,4 +9,3 @@ variable "role" {
   })
   nullable = false
 }
-

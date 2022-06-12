@@ -5,13 +5,12 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.12.0 |
-| <a name="requirement_template"></a> [template](#requirement\_template) | ~> 2.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.12.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.18.0 |
 
 ## Modules
 
@@ -28,7 +27,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_group"></a> [group](#input\_group) | Name and path of group | <pre>object({<br>    name  = string<br>    path  = string<br>    policies = list(string) # policy arns<br>  })</pre> | n/a | yes |
+| <a name="input_group"></a> [group](#input\_group) | Name and path of group | <pre>object({<br>    name     = string<br>    path     = string<br>    policies = list(string) # policy arns<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

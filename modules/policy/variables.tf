@@ -9,4 +9,3 @@ variable "policy" {
   })
   nullable = false
 }
-
