@@ -14,8 +14,11 @@ repos:
       - id: terraform_fmt
       - id: terraform_docs
       - id: terraform_validate
+        exclude: test/
       - id: terraform_tfsec
+        exclude: test/
       - id: terraform_checkov
+        exclude: test/
   - repo: https://github.com/zricethezav/gitleaks
     rev: v8.8.12
     hooks:

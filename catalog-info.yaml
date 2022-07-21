@@ -2,16 +2,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: terraform-aws-iam
-  description: Terraform module for creating IAM in Amazon Web Services
+  description: TF Component for creating IAM in Amazon Web Services
   annotations:
     github.com/project-slug: honestbank/terraform-aws-iam
     github.com/team-slug: honestbank/devops-engineers
 spec:
-  type: tf-module
-  lifecycle: prod
+  type: tf-component
+  lifecycle: production
   system: infrastructure
   owner: group:devops-engineers
-  dependencyOf:
-    - resource:application-iam
-    - resource:fnx-proxy
-    - resource:iac-iam
