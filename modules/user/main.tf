@@ -10,14 +10,16 @@ terraform {
 }
 
 resource "aws_iam_user" "user" {
+  #checkov:skip=CKV_AWS_273:Will move to SSO in the future
   name = var.user.name
   path = var.user.path
 
   force_destroy = true
 
-  tags = merge({
-    createdBy = "createdBy aws-iam/user"
-  }, var.user.tags)
+  tags = merge(
+    { createdBy = "createdBy aws-iam/user" },
+    var.user.tags
+  )
 }
 
 resource "aws_iam_user_group_membership" "groups_attached" {
