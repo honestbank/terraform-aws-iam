@@ -39,12 +39,11 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: true
       - name: Release
-        if: github.event_name == 'push' && github.base_ref == 'main'
         uses: cycjimmy/semantic-release-action@v2
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           extra_plugins: |
-            @semantic-release/git@7.0.18
-            @semantic-release/exec@3.3.8
-            @semantic-release/changelog@3.0.0
+            @semantic-release/git@10.0.1
+            @semantic-release/exec@6.0.3
+            @semantic-release/changelog@6.0.1
