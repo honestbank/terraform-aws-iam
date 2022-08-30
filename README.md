@@ -11,6 +11,7 @@ See inside each submodule for details on the module
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.12.0 |
 
@@ -18,8 +19,8 @@ See inside each submodule for details on the module
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.18.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.3.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.28.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.3.2 |
 
 ## Modules
 
