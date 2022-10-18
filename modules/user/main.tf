@@ -10,18 +10,16 @@ terraform {
 }
 
 resource "aws_iam_user" "user" {
-  name = var.user.name
-  path = var.user.path
+  name = (var.user == null) ? var.name : var.user.name
+  path = (var.user == null) ? var.path : var.user.path
 
   force_destroy = true
 
-  tags = merge({
-    createdBy = "createdBy aws-iam/user"
-  }, var.user.tags)
+  tags = ((var.user == null) ? var.tags : var.user.tags)
 }
 
 resource "aws_iam_user_group_membership" "groups_attached" {
   user = aws_iam_user.user.name
 
-  groups = var.user.groups
+  groups = (var.user == null) ? var.groups : var.user.groups
 }
