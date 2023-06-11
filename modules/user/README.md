@@ -27,7 +27,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_user"></a> [user](#input\_user) | The user to create | <pre>object({<br>    name   = string<br>    path   = string<br>    tags   = map(any)<br>    groups = list(string) # group names<br>  })</pre> | n/a | yes |
+| <a name="input_groups"></a> [groups](#input\_groups) | The groups of the user | `list(string)` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the user | `string` | `null` | no |
+| <a name="input_path"></a> [path](#input\_path) | The path of the user | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | The tags of the user | `map(any)` | `null` | no |
 
 ## Outputs
 

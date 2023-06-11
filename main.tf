@@ -34,37 +34,31 @@ data "aws_iam_policy_document" "example" {
 module "test-policy" {
   source = "./modules/policy"
 
-  policy = {
-    name        = "test-policy-${random_string.test_run_id.result}"
-    description = "test policy"
-    path        = "/"
-    tags        = {}
+  name        = "test-policy-${random_string.test_run_id.result}"
+  description = "test policy"
+  path        = "/"
+  tags        = {}
 
-    policy = data.aws_iam_policy_document.example.json
-  }
+  policy = data.aws_iam_policy_document.example.json
 }
 
 #tfsec:ignore:aws-iam-enforce-mfa # Dummy policy used for demoing module
 module "test-group" {
   source = "./modules/group"
 
-  group = {
-    name     = "test-group-${random_string.test_run_id.result}"
-    path     = "/"
-    policies = [module.test-policy.policy_arn]
-  }
+  name     = "test-group-${random_string.test_run_id.result}"
+  path     = "/"
+  policies = [module.test-policy.policy_arn]
 }
 
 module "test-user" {
   source = "./modules/user"
 
-  user = {
-    name   = "test-user-${random_string.test_run_id.result}"
-    path   = "/"
-    groups = [module.test-group.group.name]
-    tags = {
+  name   = "test-user-${random_string.test_run_id.result}"
+  path   = "/"
+  groups = [module.test-group.group.name]
+  tags = {
 
-    }
   }
 }
 
@@ -105,26 +99,21 @@ data "aws_iam_policy_document" "allow_assume_dummy_role" {
 module "test-policy2" {
   source = "./modules/policy"
 
-  policy = {
-    name        = "test-policy2-${random_string.test_run_id.result}"
-    description = "test policy2"
-    path        = "/"
-    tags        = {}
+  name        = "test-policy2-${random_string.test_run_id.result}"
+  description = "test policy2"
+  path        = "/"
+  tags        = {}
 
-    policy = data.aws_iam_policy_document.allow_assume_dummy_role.json
-  }
+  policy = data.aws_iam_policy_document.allow_assume_dummy_role.json
 }
 
 #tfsec:ignore:aws-iam-enforce-mfa # Dummy policy used for demoing module
 module "test-group2" {
   source = "./modules/group"
 
-  group = {
-    name     = "test-group2-${random_string.test_run_id.result}"
-    path     = "/test2/"
-    policies = [module.test-policy2.policy_arn]
-  }
-
+  name     = "test-group2-${random_string.test_run_id.result}"
+  path     = "/test2/"
+  policies = [module.test-policy2.policy_arn]
 }
 
 data "aws_iam_policy" "test_policy2_arn" {
@@ -137,25 +126,21 @@ data "aws_iam_policy" "test_policy2_arn" {
 module "test-user2" {
   source = "./modules/user"
 
-  user = {
-    name   = "test-user2-${random_string.test_run_id.result}"
-    path   = "/test2/"
-    groups = [module.test-group2.group.name]
-    tags = {
+  name   = "test-user2-${random_string.test_run_id.result}"
+  path   = "/test2/"
+  groups = [module.test-group2.group.name]
+  tags = {
 
-    }
   }
 }
 
 module "dummy_role" {
   source = "./modules/role"
 
-  role = {
-    name        = "dummy-role-${random_string.test_run_id.result}"
-    description = "dummy role"
-    path        = "/"
+  name        = "dummy-role-${random_string.test_run_id.result}"
+  path        = "/"
 
-    assume_role_policy = <<EOT
+  assume_role_policy = <<EOT
 {
   "Version": "2012-10-17",
   "Statement": {
@@ -164,30 +149,26 @@ module "dummy_role" {
     "Action": "sts:AssumeRole"
   }
 }
-    EOT
+  EOT
 
-    tags = {
+  tags = {
 
-    }
-    policies = []
   }
+  policies = []
 }
 
 module "test-role2" {
   source = "./modules/role"
 
-  role = {
-    name        = "test-role2-${random_string.test_run_id.result}"
-    description = "test role2"
-    path        = "/"
+  name        = "test-role2-${random_string.test_run_id.result}"
+  path        = "/"
 
-    assume_role_policy = data.aws_iam_policy_document.assume_role_dummy.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_dummy.json
 
-    tags = {
+  tags = {
 
-    }
-    policies = [module.test-policy2.policy_arn]
   }
+  policies = [module.test-policy2.policy_arn]
 }
 
 resource "random_string" "test_run_id" {

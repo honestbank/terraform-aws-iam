@@ -27,7 +27,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_policy"></a> [policy](#input\_policy) | Policy | <pre>object({<br>    name        = string<br>    path        = string<br>    description = string<br>    policy      = string<br>    tags        = map(any)<br>  })</pre> | n/a | yes |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy | `string` | `null` | no |
+| <a name="input_path"></a> [path](#input\_path) | The path of the policy | `string` | `null` | no |
+| <a name="input_policy"></a> [policy](#input\_policy) | The policy of the policy | `string` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | The tags of the policy | `map(any)` | `null` | no |
 
 ## Outputs
 

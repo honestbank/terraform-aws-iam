@@ -10,17 +10,17 @@ terraform {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = var.policy.name
-  path        = var.policy.path
-  description = var.policy.description
+  name        = var.name
+  path        = var.path
+  description = var.description
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  policy = var.policy.policy
+  policy = var.policy
 
   tags = merge({
     createdBy = "terraform aws-iam/policy"
-  }, var.policy.tags)
+  }, var.tags)
 }
 
 data "aws_caller_identity" "current" {}
