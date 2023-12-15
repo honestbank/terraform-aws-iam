@@ -30,7 +30,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | The name of the user | `string` | `null` | no |
 | <a name="input_path"></a> [path](#input\_path) | The path of the user | `string` | `null` | no |
-| <a name="input_policies"></a> [policies](#input\_policies) | The tags of the user | `list(string)` | `null` | no |
+| <a name="input_policies"></a> [policies](#input\_policies) | The policies of the user | `list(string)` | `null` | no |
 
 ## Outputs
 

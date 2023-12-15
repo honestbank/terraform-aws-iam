@@ -137,8 +137,8 @@ module "test-user2" {
 module "dummy_role" {
   source = "./modules/role"
 
-  name        = "dummy-role-${random_string.test_run_id.result}"
-  path        = "/"
+  name = "dummy-role-${random_string.test_run_id.result}"
+  path = "/"
 
   assume_role_policy = <<EOT
 {
@@ -160,8 +160,8 @@ module "dummy_role" {
 module "test-role2" {
   source = "./modules/role"
 
-  name        = "test-role2-${random_string.test_run_id.result}"
-  path        = "/"
+  name = "test-role2-${random_string.test_run_id.result}"
+  path = "/"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role_dummy.json
 
