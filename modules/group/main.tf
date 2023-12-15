@@ -10,14 +10,14 @@ terraform {
 }
 
 resource "aws_iam_group" "group" {
-  name = var.group.name
-  path = var.group.path
+  name = var.name
+  path = var.path
 }
 
 resource "aws_iam_group_policy_attachment" "policy_attachments" {
-  count      = length(var.group.policies)
+  count      = length(var.policies)
   group      = aws_iam_group.group.name
-  policy_arn = var.group.policies[count.index]
+  policy_arn = var.policies[count.index]
 
   depends_on = [
     aws_iam_group.group,
