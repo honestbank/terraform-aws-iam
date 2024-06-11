@@ -25,9 +25,19 @@ provider "aws" {
 ###############################################################################
 data "aws_iam_policy_document" "example" {
   statement {
-    actions   = ["ec2:Describe*"]
-    effect    = "Allow"
-    resources = ["*"]
+    sid = "samplePassRole"
+
+    effect = "Allow"
+
+    actions = [
+      "s3:PutObject",
+      "s3:GetObject",
+      "s3:DeleteObject"
+    ]
+
+    resources = [
+      "arn:aws:s3:::my_bucket/my_object"
+    ]
   }
 }
 
@@ -78,9 +88,19 @@ module "test-user" {
 
 data "aws_iam_policy_document" "example2" {
   statement {
-    actions   = ["ec2:Describe*"]
-    effect    = "Allow"
-    resources = ["*"]
+    sid = "samplePassRole"
+
+    effect = "Allow"
+
+    actions = [
+      "s3:PutObject",
+      "s3:GetObject",
+      "s3:DeleteObject"
+    ]
+
+    resources = [
+      "arn:aws:s3:::my_bucket/my_object"
+    ]
   }
 }
 
