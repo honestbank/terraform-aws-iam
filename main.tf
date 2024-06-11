@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "example" {
   statement {
     actions   = ["ec2:Describe*"]
     effect    = "Allow"
-    resources = ["*"]
+    resources = ["*"] #tfsec:ignore:aws-iam-no-policy-wildcards
   }
 }
 
@@ -80,7 +80,7 @@ data "aws_iam_policy_document" "example2" {
   statement {
     actions   = ["ec2:Describe*"]
     effect    = "Allow"
-    resources = ["*"]
+    resources = ["*"] #tfsec:ignore:aws-iam-no-policy-wildcards
   }
 }
 
