@@ -24,6 +24,7 @@ provider "aws" {
 #
 ###############################################################################
 data "aws_iam_policy_document" "example" {
+  #checkov:SKIP=CKV_AWS_356:This is just an example
   statement {
     actions   = ["ec2:Describe*"]
     effect    = "Allow"
@@ -77,6 +78,7 @@ module "test-user" {
 ###############################################################################
 
 data "aws_iam_policy_document" "example2" {
+  #checkov:SKIP=CKV_AWS_356:This is just an example
   statement {
     actions   = ["ec2:Describe*"]
     effect    = "Allow"
