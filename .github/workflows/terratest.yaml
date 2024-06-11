@@ -1,4 +1,8 @@
 name: "Terratest GitHub Action"
+permissions:
+    pull-requests: write
+    contents: write
+
 on:
   pull_request:
     branches: [test, dev, qa, prod, main]
