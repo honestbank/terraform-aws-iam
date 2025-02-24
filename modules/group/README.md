@@ -28,7 +28,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_group"></a> [group](#input\_group) | Name and path of group | <pre>object({<br>    name     = string<br>    path     = string<br>    policies = list(string) # policy arns<br>  })</pre> | n/a | yes |
+| <a name="input_group"></a> [group](#input\_group) | Name and path of group | <pre>object({<br/>    name     = string<br/>    path     = string<br/>    policies = list(string) # policy arns<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 
