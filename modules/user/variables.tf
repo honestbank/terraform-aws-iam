@@ -1,10 +1,10 @@
 variable "user" {
   description = "The user to create"
   type = object({
+    groups = list(string) # group names
     name   = string
     path   = string
-    tags   = map(any)
-    groups = list(string) # group names
+    tags   = optional(map(any))
   })
   nullable = false
 }

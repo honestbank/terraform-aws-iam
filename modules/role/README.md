@@ -28,7 +28,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_role"></a> [role](#input\_role) | The role to create | <pre>object({<br/>    name               = string<br/>    path               = string<br/>    tags               = map(any)<br/>    assume_role_policy = string<br/>    policies           = list(string) # policy arn<br/>  })</pre> | n/a | yes |
+| <a name="input_role"></a> [role](#input\_role) | The role to create | <pre>object({<br/>    assume_role_policy = string<br/>    name               = string<br/>    path               = string<br/>    policies           = list(string) # policy arn<br/>    tags               = optional(map(any))<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 

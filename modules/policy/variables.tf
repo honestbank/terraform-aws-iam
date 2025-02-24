@@ -1,11 +1,11 @@
 variable "policy" {
   description = "Policy"
   type = object({
+    description = string
     name        = string
     path        = string
-    description = string
     policy      = string
-    tags        = map(any)
+    tags        = optional(map(any))
   })
   nullable = false
 }
