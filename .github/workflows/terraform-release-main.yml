@@ -21,7 +21,7 @@ jobs:
       - name: Remove backend
         run: rm backend.tf
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@ed3a0531877aca392eb870f440d9ae7aba83a6bd # v1
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Format
@@ -42,7 +42,7 @@ jobs:
         continue-on-error: true
       - name: Release
         if: github.event_name == 'push' && github.base_ref == 'main'
-        uses: cycjimmy/semantic-release-action@v2
+        uses: cycjimmy/semantic-release-action@5982a02995853159735cb838992248c4f0f16166 # v2.7.0
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
