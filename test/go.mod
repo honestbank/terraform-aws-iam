@@ -1,6 +1,6 @@
 module github.com/honestbank/network-infrastructure/test/v2
 
-go 1.26.10
+go 1.26.11
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.12
